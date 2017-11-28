@@ -24,29 +24,73 @@ public class EntityZamowienie {
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	private int zamowienieID;
+	private int ZamowienieID;
 	@ManyToOne
-	@JoinColumn(name="wykladowcaID", nullable=false)
-	private EntityWykladowca wykladowca;
+	@JoinColumn(name="WykladowcaID", nullable=false)
+	private EntityWykladowca Wykladowca;
 	@ManyToOne
-	@JoinColumn(name="salaID", nullable=false)
-	private EntitySala sala;
+	@JoinColumn(name="SalaID", nullable=false)
+	private EntitySala Sala;
 	@ManyToMany(fetch = FetchType.LAZY,cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "zamowienieSprzetAlloc", 
-            joinColumns = { @JoinColumn(name = "zamowienieID") }, 
-            inverseJoinColumns = { @JoinColumn(name = "sprzetID") }
+            name = "ZamowienieSprzetAlloc", 
+            joinColumns = { @JoinColumn(name = "ZamowienieID") }, 
+            inverseJoinColumns = { @JoinColumn(name = "SprzetID") }
         )
-	private List<EntitySprzet> sprzety = new ArrayList<EntitySprzet>(0);
-	
-	@Column(name = "zamowienieDataStart", columnDefinition="DATETIME NOT NULL DEFAULT NOW()")
-	private Date dataStart;
-	@Column(name = "zamowienieDataKoniec", columnDefinition="DATETIME NOT NULL DEFAULT NOW()")
-	private Date dataKoniec;
-	@Column(name = "rodzajZajec", columnDefinition="VARCHAR(255) NOT NULL")
-	private String rodzajZajec;
-	@Column(name = "uwagi", columnDefinition="VARCHAR(255) NOT NULL")
+	private List<EntitySprzet> Sprzety = new ArrayList<EntitySprzet>(0);
+	@Column(name = "ZamowienieDataStart", columnDefinition="DATETIME NOT NULL DEFAULT NOW()")
+	private Date DataStart;
+	@Column(name = "ZamowienieDataKoniec", columnDefinition="DATETIME NOT NULL DEFAULT NOW()")
+	private Date DataKoniec;
+	@Column(name = "RodzajZajec", columnDefinition="VARCHAR(255) NOT NULL")
+	private String RodzajZajec;
+	@Column(name = "Uwagi", columnDefinition="VARCHAR(255) NOT NULL")
 	private String Uwagi;
+	
+	public EntityZamowienie(){}
+	
+	public EntityWykladowca getWykladowca() {
+		return Wykladowca;
+	}
+	public void setWykladowca(EntityWykladowca wykladowca) {
+		Wykladowca = wykladowca;
+	}
+	public EntitySala getSala() {
+		return Sala;
+	}
+	public void setSala(EntitySala sala) {
+		Sala = sala;
+	}
+	public List<EntitySprzet> getSprzety() {
+		return Sprzety;
+	}
+	public void setSprzety(List<EntitySprzet> sprzety) {
+		Sprzety = sprzety;
+	}
+	public Date getDataStart() {
+		return DataStart;
+	}
+	public void setDataStart(Date dataStart) {
+		DataStart = dataStart;
+	}
+	public Date getDataKoniec() {
+		return DataKoniec;
+	}
+	public void setDataKoniec(Date dataKoniec) {
+		DataKoniec = dataKoniec;
+	}
+	public String getRodzajZajec() {
+		return RodzajZajec;
+	}
+	public void setRodzajZajec(String rodzajZajec) {
+		RodzajZajec = rodzajZajec;
+	}
+	public String getUwagi() {
+		return Uwagi;
+	}
+	public void setUwagi(String uwagi) {
+		Uwagi = uwagi;
+	}
 	
 	
 }

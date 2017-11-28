@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,8 +19,33 @@ public class EntitySprzet {
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	private int sprzetID;
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "sprzety")
-	private List<EntityZamowienie> zamowienia = new ArrayList<EntityZamowienie>(0);
+	private int SprzetID;
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "Sprzety")
+	private List<EntityZamowienie> Zamowienia = new ArrayList<EntityZamowienie>(0);
+	@Column(name = "Nazwa", columnDefinition="VARCHAR(255) NOT NULL")
+	private String Nazwa;
+	@Column(name = "Ilosc", columnDefinition="INT NOT NULL")
+	private int Ilosc;
 	
+	public EntitySprzet() {}
+	
+	public List<EntityZamowienie> getZamowienia() {
+		return Zamowienia;
+	}
+	public void setZamowienia(List<EntityZamowienie> zamowienia) {
+		Zamowienia = zamowienia;
+	}
+	public String getNazwa() {
+		return Nazwa;
+	}
+	public void setNazwa(String nazwa) {
+		Nazwa = nazwa;
+	}
+	public int getIlosc() {
+		return Ilosc;
+	}
+	public void setIlosc(int ilosc) {
+		Ilosc = ilosc;
+	}
+
 }
