@@ -49,6 +49,9 @@ public class EntityZamowienie {
 	
 	public EntityZamowienie(){}
 	
+	public int getZamowienieID() {
+		return ZamowienieID;
+	}
 	public EntityWykladowca getWykladowca() {
 		return Wykladowca;
 	}
