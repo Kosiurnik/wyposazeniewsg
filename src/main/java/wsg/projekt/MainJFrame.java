@@ -41,6 +41,9 @@ import wsg.projekt.data.tablemodel.TableModelWykladowca;
 import wsg.projekt.data.tablemodel.TableModelZamowienie;
 import wsg.projekt.data.tablerenderer.ButtonColumn;
 import wsg.projekt.data.tablerenderer.HtmlTableCell;
+import wsg.projekt.form.FrameSalaAdd;
+import wsg.projekt.form.FrameSprzetAdd;
+import wsg.projekt.form.FrameWykladowcaAdd;
 import wsg.projekt.form.FrameZamowienieAdd;
 
 /*klasa startowa apki, tworzy pierwsze okienko i ładuje potrzebne rzeczy*/
@@ -185,12 +188,33 @@ public class MainJFrame extends JFrame {
 		panel.add(btnZamowienie);
 		
 		JButton btnWykladowca = new JButton("Dodaj wykładowcę");
+		btnWykladowca.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new FrameWykladowcaAdd().setVisible(true);
+			}
+			
+		});
 		panel.add(btnWykladowca);
 		
 		JButton btnWyposazenie = new JButton("Dodaj wyposażenie");
+		btnWyposazenie.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new FrameSprzetAdd().setVisible(true);
+			}
+			
+		});
 		panel.add(btnWyposazenie);
 		
 		JButton btnSala = new JButton("Dodaj salę");
+		btnSala.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new FrameSalaAdd().setVisible(true);
+			}
+			
+		});
 		panel.add(btnSala);
 		
 		
