@@ -13,7 +13,7 @@
          <property name="javax.persistence.jdbc.password" value="Ey7SRSU8I85IJyum"/>
          <property name="javax.persistence.jdbc.url" value="jdbc:mysql://31.179.18.86:3306/wyposazeniewsg"/>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
-		 <property name="hibernate.hbm2ddl.auto" value="create"/>
+		 <!--<property name="hibernate.hbm2ddl.auto" value="create"/>  -->
       </properties>
    </persistence-unit>
 </persistence>

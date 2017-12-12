@@ -48,12 +48,23 @@ public class TableModelZamowienie extends AbstractTableModel{
     		String[] sprzetyString = new String[sprzety.size()];
     		int index = 0;
     		for(EntityZamowienieSprzetAlloc sprzet : sprzety){
-    			sprzetyString[index]=sprzet.getSprzet().getNazwa();
+    			sprzetyString[index]=sprzet.getSprzet().getNazwa()+" - "+sprzet.getIloscSprzetu()+" "+IloscSprzetuLabel(sprzet.getIloscSprzetu());
     			index++;
     		}
     		return "<html>"+String.join("<br>", sprzetyString)+"</html>";
     	}else
     		return "brak";
+    }
+    
+    private String IloscSprzetuLabel(int ilosc){
+    	switch(ilosc){
+    	case 0: return "sztuk";
+    	case 1: return "sztuka";
+    	case 2:
+    	case 3: 
+    	case 4: return "sztuki";
+    	}
+    	return "sztuk";
     }
 
 	public void removeRow(int rowID) {

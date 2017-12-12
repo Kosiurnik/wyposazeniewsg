@@ -62,12 +62,13 @@ public class MainJFrame extends JFrame {
 	}
 	
 	private void HibernateTest(){
+		/* wpisuje jakieś dane z palca, żeby sprawdzić, czy Hibernate w ogóle działa*/
 		EntityManagerFactory emf;
 		EntityManager em;
 		emf = Persistence.createEntityManagerFactory("wyposazeniewsgDB");
 		em = emf.createEntityManager();
 		
-		em.getTransaction().begin();
+		/*em.getTransaction().begin();
 		
 		EntityZamowienie zamowienie = new EntityZamowienie();
 		EntitySala sala = new EntitySala("E101","Jakaś sala");
@@ -105,7 +106,7 @@ public class MainJFrame extends JFrame {
 		em.persist(sala);
 		em.persist(wykladowca);
 		em.persist(zamowienie);
-		em.getTransaction().commit();
+		em.getTransaction().commit();*/
 	
 		em.close();
 		emf.close();
@@ -169,9 +170,9 @@ public class MainJFrame extends JFrame {
 		panel.add(btnSala);
 		
 		
-		HibernateTest();
+		//HibernateTest();
 		
-		/*tableZamowienia.setModel(new TableModelZamowienie(repositoryZamowienie));
+		tableZamowienia.setModel(new TableModelZamowienie(repositoryZamowienie));
 		Action deleteZamowienie = new AbstractAction()
 		{
 			private static final long serialVersionUID = 1L;
@@ -193,7 +194,7 @@ public class MainJFrame extends JFrame {
 		btnDeleteZamowienie.setMnemonic(KeyEvent.VK_D);
 		ButtonColumn btnEditZamowienie = new ButtonColumn(tableZamowienia, editZamowienie, 7);
 		btnEditZamowienie.setMnemonic(KeyEvent.VK_D);
-		tableZamowienia.getColumnModel().getColumn(3).setCellRenderer(new HtmlTableCell());*/
+		tableZamowienia.getColumnModel().getColumn(3).setCellRenderer(new HtmlTableCell());
 		
 	}
 

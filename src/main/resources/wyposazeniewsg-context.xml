@@ -6,5 +6,4 @@
 	<!-- RepositoryZamowienie Bean -->
 	<bean id="RepositoryZamowienie" class="wsg.projekt.data.repository.RepositoryZamowienie"></bean>
 	
-	
 </beans>
