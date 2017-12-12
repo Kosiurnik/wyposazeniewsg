@@ -6,13 +6,9 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -26,11 +22,6 @@ import javax.swing.border.BevelBorder;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import wsg.projekt.data.HibernateInit;
-import wsg.projekt.data.entity.EntitySala;
-import wsg.projekt.data.entity.EntitySprzet;
-import wsg.projekt.data.entity.EntityWykladowca;
-import wsg.projekt.data.entity.EntityZamowienie;
-import wsg.projekt.data.entity.EntityZamowienieSprzetAlloc;
 import wsg.projekt.data.repository.RepositorySala;
 import wsg.projekt.data.repository.RepositorySprzet;
 import wsg.projekt.data.repository.RepositoryWykladowca;
@@ -42,10 +33,13 @@ import wsg.projekt.data.tablemodel.TableModelZamowienie;
 import wsg.projekt.data.tablerenderer.ButtonColumn;
 import wsg.projekt.data.tablerenderer.HtmlTableCell;
 import wsg.projekt.form.FrameSalaAdd;
+import wsg.projekt.form.FrameSalaDelete;
 import wsg.projekt.form.FrameSalaEdit;
 import wsg.projekt.form.FrameSprzetAdd;
+import wsg.projekt.form.FrameSprzetDelete;
 import wsg.projekt.form.FrameSprzetEdit;
 import wsg.projekt.form.FrameWykladowcaAdd;
+import wsg.projekt.form.FrameWykladowcaDelete;
 import wsg.projekt.form.FrameWykladowcaEdit;
 import wsg.projekt.form.FrameZamowienieAdd;
 
@@ -77,9 +71,9 @@ public class MainJFrame extends JFrame {
 			}
 		});
 	}
-	
-	private void HibernateTest(){
-		/* wpisuje jakieś dane z palca, żeby sprawdzić, czy Hibernate w ogóle działa*/
+	/* wpisuje jakieś dane z palca, żeby sprawdzić, czy Hibernate w ogóle działa*/
+	/*private void HibernateTest(){
+
 		EntityManagerFactory emf;
 		EntityManager em;
 		emf = Persistence.createEntityManagerFactory("wyposazeniewsgDB");
@@ -127,7 +121,7 @@ public class MainJFrame extends JFrame {
 	
 		em.close();
 		emf.close();
-	}
+	}*/
 	
 	public MainJFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -263,8 +257,8 @@ public class MainJFrame extends JFrame {
 			private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e)
 		    {
-				//new FrameWykladowcaDelete(repositoryWykladowca.getWykladowcaByID((int)tableWykladowcy.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
-				//tableWykladowcyReload();
+				new FrameWykladowcaDelete(repositoryWykladowca.getWykladowcaByID((int)tableWykladowcy.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
+				tableWykladowcyReload();
 		    }
 		};
 		
@@ -291,8 +285,8 @@ public class MainJFrame extends JFrame {
 			private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e)
 		    {
-				//new FrameSalaDelete(repositorySala.getSalaByID((int)tableSale.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
-				//tableSaleReload();
+				new FrameSalaDelete(repositorySala.getSalaByID((int)tableSale.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
+				tableSaleReload();
 		    }
 		};
 		
@@ -320,8 +314,8 @@ public class MainJFrame extends JFrame {
 			private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e)
 		    {
-				//new FrameSprzetDelete(repositorySprzet.getSprzetByID((int)tableWyposazenia.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
-				//tableWyposazeniaReload();
+				new FrameSprzetDelete(repositorySprzet.getSprzetByID((int)tableWyposazenia.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
+				tableWyposazeniaReload();
 		    }
 		};
 		
