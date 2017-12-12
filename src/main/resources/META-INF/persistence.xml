@@ -8,12 +8,16 @@
       <properties>
          <!-- <property name="spring.jackson.serialization.fail-on-empty-beans" value="false" /> -->
 	     <!-- <property name="hibernate.archive.autodetection" value="class" />-->
+	     <property name="hibernate.connection.CharSet" value="utf8"/>
+	     <property name="hibernate.connection.characterEncoding" value="utf8"/>
+         <property name="hibernate.connection.useUnicode" value="true"/>
          <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
          <property name="javax.persistence.jdbc.user" value="wyposazeniewsg"/>
          <property name="javax.persistence.jdbc.password" value="Ey7SRSU8I85IJyum"/>
          <property name="javax.persistence.jdbc.url" value="jdbc:mysql://31.179.18.86:3306/wyposazeniewsg"/>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
 		 <!--<property name="hibernate.hbm2ddl.auto" value="create"/>  -->
+		 <!--<property name="hibernate.hbm2ddl.auto" value="update"/> -->
       </properties>
    </persistence-unit>
 </persistence>
