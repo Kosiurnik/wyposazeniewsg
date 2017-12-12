@@ -13,9 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,13 +33,8 @@ public class EntityZamowienie implements java.io.Serializable {
 	@ManyToOne
 	@JoinColumn(name="SalaID", nullable=false)
 	private EntitySala Sala;
-	@ManyToMany(fetch = FetchType.LAZY,cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "ZamowienieSprzetAlloc", 
-            joinColumns = { @JoinColumn(name = "ZamowienieID") }, 
-            inverseJoinColumns = { @JoinColumn(name = "SprzetID") }
-        )
-	private List<EntitySprzet> Sprzety = new ArrayList<EntitySprzet>(0);
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.zamowienie", cascade=CascadeType.ALL)
+	private List<EntityZamowienieSprzetAlloc> ZamowieniaSprzety = new ArrayList<EntityZamowienieSprzetAlloc>(0);
 	@Column(name = "ZamowienieDataStart", columnDefinition="DATETIME NOT NULL DEFAULT NOW()")
 	private Date DataStart;
 	@Column(name = "ZamowienieDataKoniec", columnDefinition="DATETIME NOT NULL DEFAULT NOW()")
@@ -51,12 +45,12 @@ public class EntityZamowienie implements java.io.Serializable {
 	private String Uwagi;
 	
 	public EntityZamowienie(){}
-	public EntityZamowienie(EntityWykladowca wykladowca, EntitySala sala, List<EntitySprzet> sprzety, Date dataStart,
+	public EntityZamowienie(EntityWykladowca wykladowca, EntitySala sala, List<EntityZamowienieSprzetAlloc> sprzety, Date dataStart,
 			Date dataKoniec, String rodzajZajec, String uwagi) {
 		super();
 		Wykladowca = wykladowca;
 		Sala = sala;
-		Sprzety = sprzety;
+		ZamowieniaSprzety = sprzety;
 		DataStart = dataStart;
 		DataKoniec = dataKoniec;
 		RodzajZajec = rodzajZajec;
@@ -66,6 +60,9 @@ public class EntityZamowienie implements java.io.Serializable {
 
 	public int getZamowienieID() {
 		return ZamowienieID;
+	}
+	public void setZamowienieID(int zamowienieID) {
+		ZamowienieID = zamowienieID;
 	}
 	public EntityWykladowca getWykladowca() {
 		return Wykladowca;
@@ -78,12 +75,6 @@ public class EntityZamowienie implements java.io.Serializable {
 	}
 	public void setSala(EntitySala sala) {
 		Sala = sala;
-	}
-	public List<EntitySprzet> getSprzety() {
-		return Sprzety;
-	}
-	public void setSprzety(List<EntitySprzet> sprzety) {
-		Sprzety = sprzety;
 	}
 	public Date getDataStart() {
 		return DataStart;
@@ -110,5 +101,11 @@ public class EntityZamowienie implements java.io.Serializable {
 		Uwagi = uwagi;
 	}
 	
-	
+	public List<EntityZamowienieSprzetAlloc> getZamowieniaSprzety() {
+		return this.ZamowieniaSprzety;
+	}
+
+	public void setZamowieniaSprzety(List<EntityZamowienieSprzetAlloc> ZamowieniaSprzety) {
+		this.ZamowieniaSprzety = ZamowieniaSprzety;
+	}
 }

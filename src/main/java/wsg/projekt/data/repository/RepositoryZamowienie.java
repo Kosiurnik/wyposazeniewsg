@@ -16,7 +16,7 @@ import wsg.projekt.data.repository.interfaces.IRepositoryZamowienie;
 public class RepositoryZamowienie implements IRepositoryZamowienie {
 
 	public EntityZamowienie getZamowienieByID(int zamowienieID) {
-		try(AppEntityManager em = new AppEntityManager()){
+	/*	try(AppEntityManager em = new AppEntityManager()){
 			TypedQuery<EntityZamowienie> query = em.getEntityManager().createQuery("select z from EntityZamowienie z where z.ZamowienieID = :zID",EntityZamowienie.class).setParameter("zID", zamowienieID);
 			EntityZamowienie zamowienie = query.getSingleResult();
 			if(zamowienie.getSprzety().size()!=0){
@@ -29,12 +29,12 @@ public class RepositoryZamowienie implements IRepositoryZamowienie {
 			return zamowienie;
 		}catch(Exception e){
 			e.printStackTrace();
-		}
+		}*/
 		return null;
 	}
 
 	public List<EntityZamowienie> getAllZamowienie() {
-		try(AppEntityManager em = new AppEntityManager()){
+	/*	try(AppEntityManager em = new AppEntityManager()){
 			List<EntityZamowienie> zamowienia = em.getEntityManager().createQuery("select z from EntityZamowienie z",EntityZamowienie.class).getResultList();
 			if(zamowienia.size()!=0){
 				for(EntityZamowienie zamowienie : zamowienia){
@@ -49,7 +49,7 @@ public class RepositoryZamowienie implements IRepositoryZamowienie {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 		return null;
 	}
 

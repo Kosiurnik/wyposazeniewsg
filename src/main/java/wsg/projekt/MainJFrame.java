@@ -29,6 +29,7 @@ import wsg.projekt.data.entity.EntitySala;
 import wsg.projekt.data.entity.EntitySprzet;
 import wsg.projekt.data.entity.EntityWykladowca;
 import wsg.projekt.data.entity.EntityZamowienie;
+import wsg.projekt.data.entity.EntityZamowienieSprzetAlloc;
 import wsg.projekt.data.repository.RepositoryZamowienie;
 import wsg.projekt.data.tablemodel.TableModelZamowienie;
 import wsg.projekt.data.tablerenderer.ButtonColumn;
@@ -65,6 +66,20 @@ public class MainJFrame extends JFrame {
 		EntityManager em;
 		emf = Persistence.createEntityManagerFactory("wyposazeniewsgDB");
 		em = emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		
+		EntityZamowienie zamowienie = new EntityZamowienie();
+		EntitySala sala = new EntitySala("E101","Jakaś sala");
+		EntityWykladowca wykladowca = new EntityWykladowca("Hans","Kloss");
+		zamowienie.setWykladowca(wykladowca);
+		zamowienie.setSala(sala);
+		zamowienie.setRodzajZajec("Zajęcia");
+		zamowienie.setUwagi("uwagi");
+		zamowienie.setDataStart(new Date());
+		zamowienie.setDataKoniec(new Date());
+		
+		
 		List<EntitySprzet> sprzety = new ArrayList<EntitySprzet>();
 		sprzety.add(new EntitySprzet("Projektor BenQ MH534 DLP 1080p",5));
 		sprzety.add(new EntitySprzet("Tłuczek do mięsa",5));
@@ -74,17 +89,24 @@ public class MainJFrame extends JFrame {
 		sprzety.add(new EntitySprzet("Trebusz",1));
 		sprzety.add(new EntitySprzet("Zestaw geometryczny duży",5));
 		sprzety.add(new EntitySprzet("Monitor LED 27' Dell U2715H HDMI",10));
-		EntitySala sala = new EntitySala("E101","Jakaś sala");
-		EntityWykladowca wykladowca = new EntityWykladowca("Hans","Kloss");
-		EntityZamowienie zamowienie = new EntityZamowienie(wykladowca, sala, sprzety, new Date(), new Date(), "Metody Dyscyplinarne", "Zanieść pod salę");
+		for(EntitySprzet sprzet : sprzety)	em.persist(sprzet);
 		
-		em.getTransaction().begin();
-			for(EntitySprzet sprzet : sprzety)	em.persist(sprzet);
-			em.persist(sala);
-			em.persist(wykladowca);
-			em.persist(zamowienie);
+		
+		EntityZamowienieSprzetAlloc wpis1 = new EntityZamowienieSprzetAlloc();
+		EntityZamowienieSprzetAlloc wpis2 = new EntityZamowienieSprzetAlloc();
+		wpis1.setSprzet(sprzety.get(1));	wpis1.setIloscSprzetu(4);	wpis1.setZamowienie(zamowienie);
+		wpis2.setSprzet(sprzety.get(3));	wpis2.setIloscSprzetu(1);	wpis2.setZamowienie(zamowienie);
+		zamowienie.getZamowieniaSprzety().add(wpis1);
+		zamowienie.getZamowieniaSprzety().add(wpis2);
+		
+		
+		System.out.println(zamowienie.getZamowieniaSprzety().get(0).getZamowienie().getRodzajZajec());
+		
+		em.persist(sala);
+		em.persist(wykladowca);
+		em.persist(zamowienie);
 		em.getTransaction().commit();
-		
+	
 		em.close();
 		emf.close();
 	}
@@ -149,7 +171,7 @@ public class MainJFrame extends JFrame {
 		
 		HibernateTest();
 		
-		tableZamowienia.setModel(new TableModelZamowienie(repositoryZamowienie));
+		/*tableZamowienia.setModel(new TableModelZamowienie(repositoryZamowienie));
 		Action deleteZamowienie = new AbstractAction()
 		{
 			private static final long serialVersionUID = 1L;
@@ -171,7 +193,7 @@ public class MainJFrame extends JFrame {
 		btnDeleteZamowienie.setMnemonic(KeyEvent.VK_D);
 		ButtonColumn btnEditZamowienie = new ButtonColumn(tableZamowienia, editZamowienie, 7);
 		btnEditZamowienie.setMnemonic(KeyEvent.VK_D);
-		tableZamowienia.getColumnModel().getColumn(3).setCellRenderer(new HtmlTableCell());
+		tableZamowienia.getColumnModel().getColumn(3).setCellRenderer(new HtmlTableCell());*/
 		
 	}
 

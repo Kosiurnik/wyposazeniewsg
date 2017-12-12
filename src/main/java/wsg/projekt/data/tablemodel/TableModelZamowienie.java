@@ -6,6 +6,7 @@ import javax.swing.table.AbstractTableModel;
 
 import wsg.projekt.data.entity.EntitySprzet;
 import wsg.projekt.data.entity.EntityZamowienie;
+import wsg.projekt.data.entity.EntityZamowienieSprzetAlloc;
 import wsg.projekt.data.repository.RepositoryZamowienie;
 
 /*niestandardowy model tabeli zamówień*/
@@ -31,7 +32,7 @@ public class TableModelZamowienie extends AbstractTableModel{
     {
     	EntityZamowienie z=zamowienia.get(rowIndex);
         Object[] values=new Object[]{z.getZamowienieID(),z.getWykladowca().getImie()+" "+z.getWykladowca().getNazwisko(),z.getSala().getNumerSali(),
-        		sprzetyListString(z.getSprzety()),z.getDataStart(),z.getRodzajZajec(),z.getUwagi(),"Edytuj","Usuń"};
+        		sprzetyListString(z.getZamowieniaSprzety()),z.getDataStart(),z.getRodzajZajec(),z.getUwagi(),"Edytuj","Usuń"};
         return values[columnIndex];
     }
 
@@ -42,12 +43,12 @@ public class TableModelZamowienie extends AbstractTableModel{
         return columnNames[column];
     }
     
-    private String sprzetyListString(List<EntitySprzet> sprzety){
+    private String sprzetyListString(List<EntityZamowienieSprzetAlloc> sprzety){
     	if(sprzety.size()!=0){
     		String[] sprzetyString = new String[sprzety.size()];
     		int index = 0;
-    		for(EntitySprzet sprzet : sprzety){
-    			sprzetyString[index]=sprzet.getNazwa();
+    		for(EntityZamowienieSprzetAlloc sprzet : sprzety){
+    			sprzetyString[index]=sprzet.getSprzet().getNazwa();
     			index++;
     		}
     		return "<html>"+String.join("<br>", sprzetyString)+"</html>";

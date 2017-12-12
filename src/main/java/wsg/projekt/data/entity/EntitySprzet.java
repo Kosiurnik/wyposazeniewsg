@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /*model tabeli bazodanowej dla sprzętu*/
@@ -24,40 +24,49 @@ public class EntitySprzet implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "SprzetID", unique = true, nullable = false)
 	private int SprzetID;
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "Sprzety")
-	private List<EntityZamowienie> Zamowienia = new ArrayList<EntityZamowienie>(0);
+	/*@ManyToMany(fetch = FetchType.LAZY, mappedBy = "Sprzety") trochę podrasowujemy relacje*/
+	/*private List<EntityZamowienie> Zamowienia = new ArrayList<EntityZamowienie>(0);*/
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.sprzet")
+	private List<EntityZamowienieSprzetAlloc> ZamowieniaSprzety = new ArrayList<EntityZamowienieSprzetAlloc>(0);
 	@Column(name = "Nazwa", columnDefinition="VARCHAR(255) NOT NULL")
 	private String Nazwa;
-	@Column(name = "Ilosc", columnDefinition="INT NOT NULL")
-	private int Ilosc;
+	@Column(name = "DostepnaIlosc", columnDefinition="INT NOT NULL")
+	private int DostepnaIlosc;
 	
 	public EntitySprzet() {}
 	
 	public EntitySprzet(String nazwa, int ilosc) {
 		super();
-		Zamowienia = new ArrayList<EntityZamowienie>();
 		Nazwa = nazwa;
-		Ilosc = ilosc;
+		DostepnaIlosc = ilosc;
+	}
+	
+	public EntitySprzet(String nazwa, int ilosc, List<EntityZamowienieSprzetAlloc> zamowienia) {
+		super();
+		Nazwa = nazwa;
+		DostepnaIlosc = ilosc;
+		ZamowieniaSprzety = zamowienia;
 	}
 
-
-	public List<EntityZamowienie> getZamowienia() {
-		return Zamowienia;
-	}
-	public void setZamowienia(List<EntityZamowienie> zamowienia) {
-		Zamowienia = zamowienia;
-	}
 	public String getNazwa() {
 		return Nazwa;
 	}
 	public void setNazwa(String nazwa) {
 		Nazwa = nazwa;
 	}
-	public int getIlosc() {
-		return Ilosc;
+	public int getDostepnaIlosc() {
+		return DostepnaIlosc;
 	}
-	public void setIlosc(int ilosc) {
-		Ilosc = ilosc;
+	public void setDostepnaIlosc(int ilosc) {
+		DostepnaIlosc = ilosc;
+	}
+	
+	public List<EntityZamowienieSprzetAlloc> getZamowieniaSprzety() {
+		return this.ZamowieniaSprzety;
+	}
+
+	public void setZamowieniaSprzety(List<EntityZamowienieSprzetAlloc> ZamowieniaSprzety) {
+		this.ZamowieniaSprzety = ZamowieniaSprzety;
 	}
 
 }
