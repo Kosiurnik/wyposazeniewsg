@@ -34,7 +34,7 @@ public class RepositoryZamowienie implements IRepositoryZamowienie {
 
 	public List<EntityZamowienie> getAllZamowienie() {
 		try(AppEntityManager em = new AppEntityManager()){
-			List<EntityZamowienie> zamowienia = em.getEntityManager().createQuery("select z from EntityZamowienie z",EntityZamowienie.class).getResultList();
+			List<EntityZamowienie> zamowienia = em.getEntityManager().createQuery("select z from EntityZamowienie z order by z.ZamowienieID desc",EntityZamowienie.class).getResultList();
 			if(zamowienia.size()!=0){
 				for(EntityZamowienie zamowienie : zamowienia){
 					if(zamowienie.getZamowieniaSprzety().size()!=0){

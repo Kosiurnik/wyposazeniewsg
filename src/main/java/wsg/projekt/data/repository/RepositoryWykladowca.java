@@ -29,7 +29,7 @@ public class RepositoryWykladowca implements IRepositoryWykladowca {
 	@Override
 	public List<EntityWykladowca> getAllWykladowca() {
 		try(AppEntityManager em = new AppEntityManager()){
-			List<EntityWykladowca> wykladowca = em.getEntityManager().createQuery("select w from EntityWykladowca w",EntityWykladowca.class).getResultList();	
+			List<EntityWykladowca> wykladowca = em.getEntityManager().createQuery("select w from EntityWykladowca w order by w.WykladowcaID",EntityWykladowca.class).getResultList();	
 			if(wykladowca.size()!=0){
 				return wykladowca;
 			}

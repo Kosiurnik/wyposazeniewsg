@@ -36,7 +36,7 @@ public class RepositorySprzet implements IRepositorySprzet {
 	@Override
 	public List<EntitySprzet> getAllSprzet() {
 		try(AppEntityManager em = new AppEntityManager()){
-			List<EntitySprzet> sprzety = em.getEntityManager().createQuery("select s from EntitySprzet s",EntitySprzet.class).getResultList();
+			List<EntitySprzet> sprzety = em.getEntityManager().createQuery("select s from EntitySprzet s order by s.SprzetID",EntitySprzet.class).getResultList();
 			if(sprzety.size()!=0){
 				for(EntitySprzet sprzet : sprzety){
 					if(sprzet.getZamowieniaSprzety().size()!=0){

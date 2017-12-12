@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JDialog;
 import javax.swing.ListSelectionModel;
+import javax.swing.AbstractListModel;
 
 public class FrameZamowienieAdd extends JDialog {
 
@@ -31,6 +32,7 @@ public class FrameZamowienieAdd extends JDialog {
 		contentPane.add(lblWykadowcaZlecajcy);
 		
 		JList<?> listWykladowca = new JList<Object>();
+
 		listWykladowca.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listWykladowca.setBounds(54, 67, 1, 1);
 		contentPane.add(listWykladowca);

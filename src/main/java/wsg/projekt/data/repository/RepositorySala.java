@@ -29,7 +29,7 @@ public class RepositorySala implements IRepositorySala {
 	@Override
 	public List<EntitySala> getAllSala() {
 		try(AppEntityManager em = new AppEntityManager()){
-			List<EntitySala> sala = em.getEntityManager().createQuery("select s from EntitySala s",EntitySala.class).getResultList();	
+			List<EntitySala> sala = em.getEntityManager().createQuery("select s from EntitySala s order by s.SalaID",EntitySala.class).getResultList();	
 			if(sala.size()!=0){
 				return sala;
 			}

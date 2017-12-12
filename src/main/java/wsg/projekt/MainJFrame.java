@@ -248,6 +248,9 @@ public class MainJFrame extends JFrame {
 		btnEditZamowienie.setMnemonic(KeyEvent.VK_D);
 		tableZamowienia.getColumnModel().getColumn(3).setCellRenderer(new HtmlTableCell());
 		tableZamowienia.getColumnModel().getColumn(4).setCellRenderer(new HtmlTableCell());
+		tableZamowienia.getColumnModel().getColumn(0).setMaxWidth(90);
+		tableZamowienia.getColumnModel().getColumn(7).setMaxWidth(90);
+		tableZamowienia.getColumnModel().getColumn(8).setMaxWidth(90);
 	}
 	private void tableWykladowcyReload(){
 		tableWykladowcy.setModel(new TableModelWykladowca(repositoryWykladowca));
@@ -275,6 +278,9 @@ public class MainJFrame extends JFrame {
 		btnDeleteWykladowca.setMnemonic(KeyEvent.VK_D);
 		ButtonColumn btnEditWykladowca = new ButtonColumn(tableWykladowcy, editWykladowca, 3);
 		btnEditWykladowca.setMnemonic(KeyEvent.VK_D);
+		tableWykladowcy.getColumnModel().getColumn(0).setMaxWidth(90);
+		tableWykladowcy.getColumnModel().getColumn(3).setMaxWidth(90);
+		tableWykladowcy.getColumnModel().getColumn(4).setMaxWidth(90);
 		
 	}
 	private void tableSaleReload(){
@@ -304,6 +310,9 @@ public class MainJFrame extends JFrame {
 		ButtonColumn btnEditSala = new ButtonColumn(tableSale, editSala, 3);
 		btnEditSala.setMnemonic(KeyEvent.VK_D);
 		tableSale.getColumnModel().getColumn(2).setCellRenderer(new HtmlTableCell());
+		tableSale.getColumnModel().getColumn(0).setMaxWidth(90);
+		tableSale.getColumnModel().getColumn(3).setMaxWidth(90);
+		tableSale.getColumnModel().getColumn(4).setMaxWidth(90);
 		
 	}
 	private void tableWyposazeniaReload(){
@@ -332,6 +341,9 @@ public class MainJFrame extends JFrame {
 		btnDeleteSprzet.setMnemonic(KeyEvent.VK_D);
 		ButtonColumn btnEditSprzet = new ButtonColumn(tableWyposazenia, editSprzet, 4);
 		btnEditSprzet.setMnemonic(KeyEvent.VK_D);
+		tableWyposazenia.getColumnModel().getColumn(0).setMaxWidth(90);
+		tableWyposazenia.getColumnModel().getColumn(4).setMaxWidth(90);
+		tableWyposazenia.getColumnModel().getColumn(5).setMaxWidth(90);
 		
 	}
 
