@@ -21,7 +21,7 @@ public class RepositoryZamowienie implements IRepositoryZamowienie {
 			EntityZamowienie zamowienie = query.getSingleResult();
 			if(zamowienie.getSprzety().size()!=0){
 				for(EntitySprzet sprzet : zamowienie.getSprzety()){
-					//to takie moje prowizoryczne zabezpieczenie przed nieskoñczonym zapêtlaniem siê obiektów w obiekcie, które dzieje siê przy relacji "wiele do wielu"
+					//to takie moje prowizoryczne zabezpieczenie przed nieskoÅ„czonym zapÄ™tlaniem siÄ™ obiektÃ³w w obiekcie, ktÃ³re dzieje siÄ™ przy relacji "wiele do wielu". WaÅ¼ne, Å¼e dziaÅ‚a!
 					sprzet.setZamowienia(new ArrayList<EntityZamowienie>());
 				}
 				zamowienie.setSprzety(zamowienie.getSprzety());

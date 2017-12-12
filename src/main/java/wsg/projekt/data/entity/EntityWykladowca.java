@@ -2,6 +2,7 @@ package wsg.projekt.data.entity;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,10 +14,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Wykladowca")
-public class EntityWykladowca {
+public class EntityWykladowca implements java.io.Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "WykladowcaID", unique = true, nullable = false)
 	private int WykladowcaID;
 	@OneToMany(mappedBy="Wykladowca")
 	private List<EntityZamowienie> Zamowienie;
@@ -26,7 +30,14 @@ public class EntityWykladowca {
 	private String Nazwisko;
 	
 	public EntityWykladowca(){}
-	
+	public EntityWykladowca(String imie, String nazwisko) {
+		super();
+		Zamowienie = new ArrayList<EntityZamowienie>();
+		Imie = imie;
+		Nazwisko = nazwisko;
+	}
+
+
 	public List<EntityZamowienie> getZamowienie() {
 		return Zamowienie;
 	}

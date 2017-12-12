@@ -10,10 +10,10 @@
 	     <!-- <property name="hibernate.archive.autodetection" value="class" />-->
          <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
          <property name="javax.persistence.jdbc.user" value="wyposazeniewsg"/>
-         <property name="javax.persistence.jdbc.password" value="wyposazeniewsg"/>
-         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://potato-droid.ddns.net:3306/wyposazeniewsg"/>
+         <property name="javax.persistence.jdbc.password" value="Ey7SRSU8I85IJyum"/>
+         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://31.179.18.86:3306/wyposazeniewsg"/>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
-		 <!-- <property name="hibernate.hbm2ddl.auto" value="create"/> -->
+		 <property name="hibernate.hbm2ddl.auto" value="create"/>
       </properties>
    </persistence-unit>
 </persistence>

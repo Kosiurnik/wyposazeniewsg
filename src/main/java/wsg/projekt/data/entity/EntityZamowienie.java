@@ -20,10 +20,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Zamowienie")
-public class EntityZamowienie {
+public class EntityZamowienie implements java.io.Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "ZamowienieID", unique = true, nullable = false)
 	private int ZamowienieID;
 	@ManyToOne
 	@JoinColumn(name="WykladowcaID", nullable=false)
@@ -48,7 +51,19 @@ public class EntityZamowienie {
 	private String Uwagi;
 	
 	public EntityZamowienie(){}
-	
+	public EntityZamowienie(EntityWykladowca wykladowca, EntitySala sala, List<EntitySprzet> sprzety, Date dataStart,
+			Date dataKoniec, String rodzajZajec, String uwagi) {
+		super();
+		Wykladowca = wykladowca;
+		Sala = sala;
+		Sprzety = sprzety;
+		DataStart = dataStart;
+		DataKoniec = dataKoniec;
+		RodzajZajec = rodzajZajec;
+		Uwagi = uwagi;
+	}
+
+
 	public int getZamowienieID() {
 		return ZamowienieID;
 	}

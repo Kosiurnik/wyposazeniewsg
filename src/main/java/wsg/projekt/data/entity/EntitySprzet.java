@@ -13,12 +13,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+/*model tabeli bazodanowej dla sprzętu*/
 @Entity
 @Table(name = "Sprzet")
-public class EntitySprzet {
+public class EntitySprzet implements java.io.Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "SprzetID", unique = true, nullable = false)
 	private int SprzetID;
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "Sprzety")
 	private List<EntityZamowienie> Zamowienia = new ArrayList<EntityZamowienie>(0);
@@ -29,6 +33,14 @@ public class EntitySprzet {
 	
 	public EntitySprzet() {}
 	
+	public EntitySprzet(String nazwa, int ilosc) {
+		super();
+		Zamowienia = new ArrayList<EntityZamowienie>();
+		Nazwa = nazwa;
+		Ilosc = ilosc;
+	}
+
+
 	public List<EntityZamowienie> getZamowienia() {
 		return Zamowienia;
 	}
