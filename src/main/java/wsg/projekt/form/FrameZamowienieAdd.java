@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JDialog;
 import javax.swing.ListSelectionModel;
-import javax.swing.AbstractListModel;
 
 public class FrameZamowienieAdd extends JDialog {
 
