@@ -42,6 +42,9 @@ public class EntitySala implements java.io.Serializable {
 	}
 
 
+	public int getSalaID() {
+		return SalaID;
+	}
 	public List<EntityZamowienie> getZamowienie() {
 		return Zamowienie;
 	}

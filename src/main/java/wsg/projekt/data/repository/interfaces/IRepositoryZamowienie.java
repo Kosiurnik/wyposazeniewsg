@@ -6,6 +6,6 @@ import wsg.projekt.data.entity.EntityZamowienie;
 
 public interface IRepositoryZamowienie {
 	
-	public EntityZamowienie getZamowienieByID(int userID);
+	public EntityZamowienie getZamowienieByID(int ID);
 	public List<EntityZamowienie> getAllZamowienie();
 }

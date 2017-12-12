@@ -8,7 +8,6 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 import wsg.projekt.data.controller.AppEntityManager;
-import wsg.projekt.data.entity.EntitySprzet;
 import wsg.projekt.data.entity.EntityZamowienie;
 import wsg.projekt.data.entity.EntityZamowienieSprzetAlloc;
 import wsg.projekt.data.repository.interfaces.IRepositoryZamowienie;

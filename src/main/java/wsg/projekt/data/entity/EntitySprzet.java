@@ -30,6 +30,8 @@ public class EntitySprzet implements java.io.Serializable {
 	private List<EntityZamowienieSprzetAlloc> ZamowieniaSprzety = new ArrayList<EntityZamowienieSprzetAlloc>(0);
 	@Column(name = "Nazwa", columnDefinition="VARCHAR(255) NOT NULL")
 	private String Nazwa;
+	@Column(name = "MaxIlosc", columnDefinition="INT NOT NULL")
+	private int MaxIlosc;
 	@Column(name = "DostepnaIlosc", columnDefinition="INT NOT NULL")
 	private int DostepnaIlosc;
 	
@@ -39,6 +41,7 @@ public class EntitySprzet implements java.io.Serializable {
 		super();
 		Nazwa = nazwa;
 		DostepnaIlosc = ilosc;
+		MaxIlosc = ilosc;
 	}
 	
 	public EntitySprzet(String nazwa, int ilosc, List<EntityZamowienieSprzetAlloc> zamowienia) {
@@ -48,6 +51,10 @@ public class EntitySprzet implements java.io.Serializable {
 		ZamowieniaSprzety = zamowienia;
 	}
 
+	
+	public int getSprzetID() {
+		return SprzetID;
+	}
 	public String getNazwa() {
 		return Nazwa;
 	}
@@ -60,7 +67,14 @@ public class EntitySprzet implements java.io.Serializable {
 	public void setDostepnaIlosc(int ilosc) {
 		DostepnaIlosc = ilosc;
 	}
-	
+	public int getMaxIlosc() {
+		return MaxIlosc;
+	}
+
+	public void setMaxIlosc(int maxIlosc) {
+		MaxIlosc = maxIlosc;
+	}
+
 	public List<EntityZamowienieSprzetAlloc> getZamowieniaSprzety() {
 		return this.ZamowieniaSprzety;
 	}

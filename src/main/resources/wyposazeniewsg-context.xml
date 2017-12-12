@@ -6,4 +6,13 @@
 	<!-- RepositoryZamowienie Bean -->
 	<bean id="RepositoryZamowienie" class="wsg.projekt.data.repository.RepositoryZamowienie"></bean>
 	
+	<!-- RepositoryWykladowca Bean -->
+	<bean id="RepositoryWykladowca" class="wsg.projekt.data.repository.RepositoryWykladowca"></bean>
+	
+	<!-- RepositorySala Bean -->
+	<bean id="RepositorySala" class="wsg.projekt.data.repository.RepositorySala"></bean>
+	
+	<!-- RepositorySprzet Bean -->
+	<bean id="RepositorySprzet" class="wsg.projekt.data.repository.RepositorySprzet"></bean>
+	
 </beans>

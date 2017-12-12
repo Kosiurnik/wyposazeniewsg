@@ -37,6 +37,8 @@ public class FrameZamowienieAdd extends JFrame {
 	 * Create the frame.
 	 */
 	public FrameZamowienieAdd() {
+		toFront();
+		requestFocus();
 		setTitle("Nowe Zamówienie");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,5 +51,10 @@ public class FrameZamowienieAdd extends JFrame {
 		JLabel lblWykadowcaZlecajcy = new JLabel("Wykładowca zlecający:");
 		lblWykadowcaZlecajcy.setBounds(12, 13, 133, 16);
 		contentPane.add(lblWykadowcaZlecajcy);
+		
+		JList<?> listWykladowca = new JList<Object>();
+		listWykladowca.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listWykladowca.setBounds(54, 67, 1, 1);
+		contentPane.add(listWykladowca);
 	}
 }

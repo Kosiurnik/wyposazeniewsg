@@ -61,9 +61,6 @@ public class EntityZamowienie implements java.io.Serializable {
 	public int getZamowienieID() {
 		return ZamowienieID;
 	}
-	public void setZamowienieID(int zamowienieID) {
-		ZamowienieID = zamowienieID;
-	}
 	public EntityWykladowca getWykladowca() {
 		return Wykladowca;
 	}

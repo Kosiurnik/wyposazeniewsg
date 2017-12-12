@@ -38,6 +38,9 @@ public class EntityWykladowca implements java.io.Serializable {
 	}
 
 
+	public int getWykladowcaID() {
+		return WykladowcaID;
+	}
 	public List<EntityZamowienie> getZamowienie() {
 		return Zamowienie;
 	}
