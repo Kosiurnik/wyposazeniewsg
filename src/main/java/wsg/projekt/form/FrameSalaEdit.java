@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -16,19 +17,17 @@ import javax.swing.border.EmptyBorder;
 import wsg.projekt.data.controller.AppEntityManager;
 import wsg.projekt.data.entity.EntitySala;
 
-import javax.swing.JScrollPane;
-
-public class FrameSalaAdd extends JDialog {
+public class FrameSalaEdit extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tfSalaNumer;
 	private JTextArea tfSalaOpis;
-
-	public FrameSalaAdd() {
+	
+	public FrameSalaEdit(final EntitySala sala) {
 		setModal(true);
 		setResizable(false);
-		setTitle("Dodaj salę");
+		setTitle("Edytuj salę");
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 310, 180);
@@ -42,6 +41,7 @@ public class FrameSalaAdd extends JDialog {
 		contentPane.add(lblImi);
 		
 		tfSalaNumer = new JTextField();
+		tfSalaNumer.setText(sala.getNumerSali());
 		tfSalaNumer.setToolTipText("Numer sali");
 		tfSalaNumer.setBounds(93, 10, 201, 22);
 		contentPane.add(tfSalaNumer);
@@ -52,6 +52,7 @@ public class FrameSalaAdd extends JDialog {
 		contentPane.add(lblNazwisko);
 		
 		tfSalaOpis = new JTextArea();
+		tfSalaOpis.setText(sala.getOpis());
 		tfSalaOpis.setLineWrap(true);
 		tfSalaOpis.setToolTipText("Opis sali");
 		tfSalaOpis.setBounds(14, 15, 201, 55);
@@ -61,7 +62,7 @@ public class FrameSalaAdd extends JDialog {
 		contentPane.add(sp);
 		tfSalaOpis.setColumns(10);
 		
-		JButton btnAccept = new JButton("Dodaj");
+		JButton btnAccept = new JButton("Zmień");
 		btnAccept.setBounds(12, 107, 97, 25);
 		contentPane.add(btnAccept);
 		
@@ -74,11 +75,10 @@ public class FrameSalaAdd extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				try(AppEntityManager em = new AppEntityManager()){
 					if(formValidate()){
-						EntitySala sala = new EntitySala();
 						sala.setNumerSali(tfSalaNumer.getText());
 						sala.setOpis(tfSalaOpis.getText());
 						em.getEntityManager().getTransaction().begin();
-						em.getEntityManager().persist(sala);
+						em.getEntityManager().merge(sala);
 						em.getEntityManager().getTransaction().commit();
 						dispose();
 					}
@@ -113,4 +113,5 @@ public class FrameSalaAdd extends JDialog {
 		}
 		return true;
 	}
+
 }

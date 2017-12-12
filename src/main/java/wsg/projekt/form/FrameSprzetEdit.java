@@ -19,7 +19,7 @@ import wsg.projekt.data.controller.AppEntityManager;
 import wsg.projekt.data.entity.EntitySprzet;
 import wsg.projekt.data.entity.EntityZamowienieSprzetAlloc;
 
-public class FrameSprzetAdd extends JDialog {
+public class FrameSprzetEdit extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -27,10 +27,10 @@ public class FrameSprzetAdd extends JDialog {
 	private JTextField tfSprzetIlosc;
 
 
-	public FrameSprzetAdd() {
+	public FrameSprzetEdit(final EntitySprzet sprzet) {
 		setModal(true);
 		setResizable(false);
-		setTitle("Dodaj sprzęt");
+		setTitle("Zmień sprzęt");
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 310, 150);
@@ -44,6 +44,7 @@ public class FrameSprzetAdd extends JDialog {
 		contentPane.add(lblImi);
 		
 		tfSprzetNazwa = new JTextField();
+		tfSprzetNazwa.setText(sprzet.getNazwa());
 		tfSprzetNazwa.setToolTipText("Nazwa sprzętu");
 		tfSprzetNazwa.setBounds(93, 10, 201, 22);
 		contentPane.add(tfSprzetNazwa);
@@ -54,12 +55,13 @@ public class FrameSprzetAdd extends JDialog {
 		contentPane.add(lblNazwisko);
 		
 		tfSprzetIlosc = new JTextField();
+		tfSprzetIlosc.setText(sprzet.getMaxIlosc()+"");
 		tfSprzetIlosc.setToolTipText("Ilość dysponowanego sprzętu");
 		tfSprzetIlosc.setBounds(93, 39, 97, 22);
 		contentPane.add(tfSprzetIlosc);
 		tfSprzetIlosc.setColumns(10);
 		
-		JButton btnAccept = new JButton("Dodaj");
+		JButton btnAccept = new JButton("Zmień");
 		btnAccept.setBounds(12, 74, 97, 25);
 		contentPane.add(btnAccept);
 		
@@ -72,13 +74,12 @@ public class FrameSprzetAdd extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				try(AppEntityManager em = new AppEntityManager()){
 					if(formValidate()){
-						EntitySprzet sprzet = new EntitySprzet();
 						sprzet.setNazwa(tfSprzetNazwa.getText());
 						sprzet.setMaxIlosc(Integer.parseInt(tfSprzetIlosc.getText()));
 						sprzet.setDostepnaIlosc(Integer.parseInt(tfSprzetIlosc.getText()));
 						sprzet.setZamowieniaSprzety(new ArrayList<EntityZamowienieSprzetAlloc>());
 						em.getEntityManager().getTransaction().begin();
-						em.getEntityManager().persist(sprzet);
+						em.getEntityManager().merge(sprzet);
 						em.getEntityManager().getTransaction().commit();
 						dispose();
 					}
@@ -120,4 +121,5 @@ public class FrameSprzetAdd extends JDialog {
 		}
 		return true;
 	}
+
 }

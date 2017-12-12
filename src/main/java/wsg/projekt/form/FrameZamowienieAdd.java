@@ -1,41 +1,19 @@
 package wsg.projekt.form;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.AbstractListModel;
+import javax.swing.JDialog;
 import javax.swing.ListSelectionModel;
 
-public class FrameZamowienieAdd extends JFrame {
+public class FrameZamowienieAdd extends JDialog {
 
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrameZamowienieAdd frame = new FrameZamowienieAdd();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
-	 * Create the frame.
-	 */
 	public FrameZamowienieAdd() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		toFront();

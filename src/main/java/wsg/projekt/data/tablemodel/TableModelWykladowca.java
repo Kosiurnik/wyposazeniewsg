@@ -42,14 +42,6 @@ public class TableModelWykladowca extends AbstractTableModel{
         return columnNames[column];
     }
 	
-	public void removeRow(int rowID) {
-		System.out.println(rowID);
-	}
-	
-	public void editRow(int rowID) {
-		System.out.println(rowID);
-	}
-	
 	@Override
 	public boolean isCellEditable(int row, int col) {
 		if(col==3||col==4)

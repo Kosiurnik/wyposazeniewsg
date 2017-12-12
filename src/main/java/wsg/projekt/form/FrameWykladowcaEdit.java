@@ -1,34 +1,33 @@
 package wsg.projekt.form;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import wsg.projekt.data.controller.AppEntityManager;
-import wsg.projekt.data.entity.EntityWykladowca;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
-public class FrameWykladowcaAdd extends JDialog {
+import wsg.projekt.data.controller.AppEntityManager;
+import wsg.projekt.data.entity.EntityWykladowca;
+
+public class FrameWykladowcaEdit extends JDialog {
 
 	private static final long serialVersionUID = 1L;
+
 	private JPanel contentPane;
 	private JTextField tfWykladowcaImie;
 	private JTextField tfWykladowcaNazwisko;
 
 
-	public FrameWykladowcaAdd() {
+	public FrameWykladowcaEdit(final EntityWykladowca wykladowca) {
 		setModal(true);
 		setResizable(false);
-		setTitle("Dodaj wykładowcę");
+		setTitle("Zmień wykładowcę");
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 310, 150);
@@ -42,6 +41,7 @@ public class FrameWykladowcaAdd extends JDialog {
 		contentPane.add(lblImi);
 		
 		tfWykladowcaImie = new JTextField();
+		tfWykladowcaImie.setText(wykladowca.getImie());
 		tfWykladowcaImie.setToolTipText("Imię wykładowcy");
 		tfWykladowcaImie.setBounds(93, 10, 201, 22);
 		contentPane.add(tfWykladowcaImie);
@@ -52,12 +52,13 @@ public class FrameWykladowcaAdd extends JDialog {
 		contentPane.add(lblNazwisko);
 		
 		tfWykladowcaNazwisko = new JTextField();
+		tfWykladowcaNazwisko.setText(wykladowca.getNazwisko());
 		tfWykladowcaNazwisko.setToolTipText("Nazwisko wykładowcy");
 		tfWykladowcaNazwisko.setBounds(93, 39, 201, 22);
 		contentPane.add(tfWykladowcaNazwisko);
 		tfWykladowcaNazwisko.setColumns(10);
 		
-		JButton btnAccept = new JButton("Dodaj");
+		JButton btnAccept = new JButton("Zmień");
 		btnAccept.setBounds(12, 74, 97, 25);
 		contentPane.add(btnAccept);
 		
@@ -70,11 +71,10 @@ public class FrameWykladowcaAdd extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				try(AppEntityManager em = new AppEntityManager()){
 					if(formValidate()){
-						EntityWykladowca wykladowca = new EntityWykladowca();
 						wykladowca.setImie(tfWykladowcaImie.getText());
 						wykladowca.setNazwisko(tfWykladowcaNazwisko.getText());
 						em.getEntityManager().getTransaction().begin();
-						em.getEntityManager().persist(wykladowca);
+						em.getEntityManager().merge(wykladowca);
 						em.getEntityManager().getTransaction().commit();
 						dispose();
 					}
@@ -91,6 +91,7 @@ public class FrameWykladowcaAdd extends JDialog {
 			}
 		});
 	}
+	
 	private boolean formValidate(){
 		if(tfWykladowcaImie.getText().equals(null)||tfWykladowcaImie.getText().equals("")){
 			JOptionPane.showMessageDialog(this,
@@ -108,4 +109,5 @@ public class FrameWykladowcaAdd extends JDialog {
 		}
 		return true;
 	}
+
 }

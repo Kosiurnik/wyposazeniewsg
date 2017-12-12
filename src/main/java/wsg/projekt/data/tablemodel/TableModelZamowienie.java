@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import wsg.projekt.data.entity.EntitySprzet;
 import wsg.projekt.data.entity.EntityZamowienie;
 import wsg.projekt.data.entity.EntityZamowienieSprzetAlloc;
 import wsg.projekt.data.repository.RepositoryZamowienie;
@@ -66,14 +65,6 @@ public class TableModelZamowienie extends AbstractTableModel{
     	}
     	return "sztuk";
     }
-
-	public void removeRow(int rowID) {
-		System.out.println(rowID);
-	}
-	
-	public void editRow(int rowID) {
-		System.out.println(rowID);
-	}
 	
 	@Override
 	public boolean isCellEditable(int row, int col) {

@@ -42,8 +42,11 @@ import wsg.projekt.data.tablemodel.TableModelZamowienie;
 import wsg.projekt.data.tablerenderer.ButtonColumn;
 import wsg.projekt.data.tablerenderer.HtmlTableCell;
 import wsg.projekt.form.FrameSalaAdd;
+import wsg.projekt.form.FrameSalaEdit;
 import wsg.projekt.form.FrameSprzetAdd;
+import wsg.projekt.form.FrameSprzetEdit;
 import wsg.projekt.form.FrameWykladowcaAdd;
+import wsg.projekt.form.FrameWykladowcaEdit;
 import wsg.projekt.form.FrameZamowienieAdd;
 
 /*klasa startowa apki, tworzy pierwsze okienko i ładuje potrzebne rzeczy*/
@@ -161,13 +164,13 @@ public class MainJFrame extends JFrame {
 		tableSale = new JTable();
 		scrollPaneSale.setViewportView(tableSale);
 		
-		/*Uzupełnianie tabel*/
-		tableZamowienia.setModel(new TableModelZamowienie(repositoryZamowienie));
-		tableWykladowcy.setModel(new TableModelWykladowca(repositoryWykladowca));
-		tableSale.setModel(new TableModelSala(repositorySala));
-		tableWyposazenia.setModel(new TableModelSprzet(repositorySprzet));
+		/*Przeładowuję tabelki*/
+		tableZamowieniaReload();
+		tableWykladowcyReload();
+		tableSaleReload();
+		tableWyposazeniaReload();
 		
-		/*Kalendarz...*/
+		/*Kalendarz... Ta...*/
 		JPanel paneKalendarz = new JPanel();
 		tabbedPane.addTab("Kalendarz obłożenia", null, paneKalendarz, null);
 		
@@ -182,6 +185,7 @@ public class MainJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new FrameZamowienieAdd().setVisible(true);
+				tableZamowieniaReload();
 			}
 			
 		});
@@ -192,6 +196,7 @@ public class MainJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new FrameWykladowcaAdd().setVisible(true);
+				tableWykladowcyReload();
 			}
 			
 		});
@@ -202,6 +207,7 @@ public class MainJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new FrameSprzetAdd().setVisible(true);
+				tableWyposazeniaReload();
 			}
 			
 		});
@@ -212,21 +218,24 @@ public class MainJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new FrameSalaAdd().setVisible(true);
+				tableSaleReload();
 			}
 			
 		});
 		panel.add(btnSala);
-		
-		
 		//HibernateTest();
-		
+	}
+	
+	private void tableZamowieniaReload(){
+		tableZamowienia.setModel(new TableModelZamowienie(repositoryZamowienie));
 		/*Akcje dla przycisków tabelki zamówień*/
 		Action deleteZamowienie = new AbstractAction()
 		{
 			private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e)
 		    {
-		        ((TableModelZamowienie)tableZamowienia.getModel()).removeRow((int)tableZamowienia.getValueAt(Integer.valueOf(e.getActionCommand()), 0));
+				//new FrameZamowieniaDelete(repositoryZamowienie.getZamowienieByID((int)tableZamowienia.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
+				//tableZamowieniaReload();
 		    }
 		};
 		
@@ -235,7 +244,8 @@ public class MainJFrame extends JFrame {
 			private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e)
 		    {
-		        ((TableModelZamowienie)tableZamowienia.getModel()).editRow((int)tableZamowienia.getValueAt(Integer.valueOf(e.getActionCommand()), 0));
+				//new FrameZamowieniaEdit(repositoryZamowienie.getZamowienieByID((int)tableZamowienia.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
+				//tableZamowieniaReload();
 		    }
 		};
 		ButtonColumn btnDeleteZamowienie = new ButtonColumn(tableZamowienia, deleteZamowienie, 8);
@@ -243,15 +253,18 @@ public class MainJFrame extends JFrame {
 		ButtonColumn btnEditZamowienie = new ButtonColumn(tableZamowienia, editZamowienie, 7);
 		btnEditZamowienie.setMnemonic(KeyEvent.VK_D);
 		tableZamowienia.getColumnModel().getColumn(3).setCellRenderer(new HtmlTableCell());
-		
-		
+		tableZamowienia.getColumnModel().getColumn(4).setCellRenderer(new HtmlTableCell());
+	}
+	private void tableWykladowcyReload(){
+		tableWykladowcy.setModel(new TableModelWykladowca(repositoryWykladowca));
 		/*Akcje dla przycisków tabelki wykładowców*/
 		Action deleteWykladowca = new AbstractAction()
 		{
 			private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e)
 		    {
-		        ((TableModelWykladowca)tableWykladowcy.getModel()).removeRow((int)tableWykladowcy.getValueAt(Integer.valueOf(e.getActionCommand()), 0));
+				//new FrameWykladowcaDelete(repositoryWykladowca.getWykladowcaByID((int)tableWykladowcy.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
+				//tableWykladowcyReload();
 		    }
 		};
 		
@@ -260,22 +273,26 @@ public class MainJFrame extends JFrame {
 			private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e)
 		    {
-		        ((TableModelWykladowca)tableWykladowcy.getModel()).editRow((int)tableWykladowcy.getValueAt(Integer.valueOf(e.getActionCommand()), 0));
+				new FrameWykladowcaEdit(repositoryWykladowca.getWykladowcaByID((int)tableWykladowcy.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
+				tableWykladowcyReload();
 		    }
 		};
-		ButtonColumn btnDeleteWykladowca = new ButtonColumn(tableWykladowcy, deleteWykladowca, 3);
+		ButtonColumn btnDeleteWykladowca = new ButtonColumn(tableWykladowcy, deleteWykladowca, 4);
 		btnDeleteWykladowca.setMnemonic(KeyEvent.VK_D);
-		ButtonColumn btnEditWykladowca = new ButtonColumn(tableWykladowcy, editWykladowca, 4);
+		ButtonColumn btnEditWykladowca = new ButtonColumn(tableWykladowcy, editWykladowca, 3);
 		btnEditWykladowca.setMnemonic(KeyEvent.VK_D);
 		
-		
+	}
+	private void tableSaleReload(){
+		tableSale.setModel(new TableModelSala(repositorySala));
 		/*Akcje dla przycisków tabelki sal*/
 		Action deleteSala = new AbstractAction()
 		{
 			private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e)
 		    {
-		        ((TableModelSala)tableSale.getModel()).removeRow((int)tableSale.getValueAt(Integer.valueOf(e.getActionCommand()), 0));
+				//new FrameSalaDelete(repositorySala.getSalaByID((int)tableSale.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
+				//tableSaleReload();
 		    }
 		};
 		
@@ -284,22 +301,27 @@ public class MainJFrame extends JFrame {
 			private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e)
 		    {
-		        ((TableModelSala)tableSale.getModel()).editRow((int)tableSale.getValueAt(Integer.valueOf(e.getActionCommand()), 0));
+				new FrameSalaEdit(repositorySala.getSalaByID((int)tableSale.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
+				tableSaleReload();
 		    }
 		};
-		ButtonColumn btnDeleteSala = new ButtonColumn(tableSale, deleteSala, 3);
+		ButtonColumn btnDeleteSala = new ButtonColumn(tableSale, deleteSala, 4);
 		btnDeleteSala.setMnemonic(KeyEvent.VK_D);
-		ButtonColumn btnEditSala = new ButtonColumn(tableSale, editSala, 4);
+		ButtonColumn btnEditSala = new ButtonColumn(tableSale, editSala, 3);
 		btnEditSala.setMnemonic(KeyEvent.VK_D);
+		tableSale.getColumnModel().getColumn(2).setCellRenderer(new HtmlTableCell());
 		
-		
+	}
+	private void tableWyposazeniaReload(){
+		tableWyposazenia.setModel(new TableModelSprzet(repositorySprzet));	
 		/*Akcje dla przycisków tabelki sprzętów*/
 		Action deleteSprzet = new AbstractAction()
 		{
 			private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e)
 		    {
-		        ((TableModelSprzet)tableWyposazenia.getModel()).removeRow((int)tableWyposazenia.getValueAt(Integer.valueOf(e.getActionCommand()), 0));
+				//new FrameSprzetDelete(repositorySprzet.getSprzetByID((int)tableWyposazenia.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
+				//tableWyposazeniaReload();
 		    }
 		};
 		
@@ -308,13 +330,15 @@ public class MainJFrame extends JFrame {
 			private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e)
 		    {
-		        ((TableModelSprzet)tableWyposazenia.getModel()).editRow((int)tableWyposazenia.getValueAt(Integer.valueOf(e.getActionCommand()), 0));
+				new FrameSprzetEdit(repositorySprzet.getSprzetByID((int)tableWyposazenia.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
+				tableWyposazeniaReload();
 		    }
 		};
-		ButtonColumn btnDeleteSprzet = new ButtonColumn(tableWyposazenia, deleteSprzet, 4);
+		ButtonColumn btnDeleteSprzet = new ButtonColumn(tableWyposazenia, deleteSprzet, 5);
 		btnDeleteSprzet.setMnemonic(KeyEvent.VK_D);
-		ButtonColumn btnEditSprzet = new ButtonColumn(tableWyposazenia, editSprzet, 5);
+		ButtonColumn btnEditSprzet = new ButtonColumn(tableWyposazenia, editSprzet, 4);
 		btnEditSprzet.setMnemonic(KeyEvent.VK_D);
+		
 	}
 
 }
