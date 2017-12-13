@@ -32,6 +32,7 @@ import wsg.projekt.data.tablemodel.TableModelWykladowca;
 import wsg.projekt.data.tablemodel.TableModelZamowienie;
 import wsg.projekt.data.tablerenderer.ButtonColumn;
 import wsg.projekt.data.tablerenderer.HtmlTableCell;
+import wsg.projekt.form.FrameAppPreloader;
 import wsg.projekt.form.FrameSalaAdd;
 import wsg.projekt.form.FrameSalaDelete;
 import wsg.projekt.form.FrameSalaEdit;
@@ -50,7 +51,8 @@ public class MainJFrame extends JFrame {
 	public EntityManagerFactory emf;
 	public EntityManager em;
 	private JTable tableZamowienia, tableWykladowcy, tableWyposazenia, tableSale;
-
+	static JFrame preloader;
+	
 	/*Spring - ładuję beany z repozytoriami danych do ładowania ich w listach do modelu wypełniającego tabelki*/
 	private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("wyposazeniewsg-context.xml");
 	private RepositoryZamowienie repositoryZamowienie = context.getBean("RepositoryZamowienie",RepositoryZamowienie.class);
@@ -59,14 +61,24 @@ public class MainJFrame extends JFrame {
 	private RepositorySprzet repositorySprzet = context.getBean("RepositorySprzet",RepositorySprzet.class);
 	
 	public static void main(String[] args) {
-		new HibernateInit();
+		preloader = new FrameAppPreloader();
+		preloader.setVisible(true);
+		((FrameAppPreloader) preloader).appendMessage("Ładowanie Hibernate...");
+		try{
+			new HibernateInit();
+		}catch(Exception e){
+			((FrameAppPreloader) preloader).appendMessage("Błąd ładowania Hibernate");
+			((FrameAppPreloader) preloader).appendMessage(e.getMessage());
+		}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					MainJFrame frame = new MainJFrame();
 					frame.setVisible(true);
+					preloader.dispose();
 				} catch (Exception e) {
-					e.printStackTrace();
+					((FrameAppPreloader) preloader).appendMessage("Coś poszło nie tak.");
+					((FrameAppPreloader) preloader).appendMessage(e.getMessage());
 				}
 			}
 		});
