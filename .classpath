@@ -32,5 +32,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/Eclipse/libs/hibernate-jpa-2.1-api-1.0.0.final.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

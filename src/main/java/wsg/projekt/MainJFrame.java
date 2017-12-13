@@ -127,6 +127,7 @@ public class MainJFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 827, 583);
 		getContentPane().setLayout(new BorderLayout(0, 0));
+		setTitle("System zarządzania wyposażeniem WSG");
 		
 		/*Tworzę zakładkowe menu górne*/
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
