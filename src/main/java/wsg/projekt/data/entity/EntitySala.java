@@ -69,5 +69,8 @@ public class EntitySala implements java.io.Serializable {
 		Opis = opis;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return NumerSali;
+	}
 }

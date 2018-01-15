@@ -6,9 +6,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -22,6 +26,11 @@ import javax.swing.border.BevelBorder;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import wsg.projekt.data.HibernateInit;
+import wsg.projekt.data.entity.EntitySala;
+import wsg.projekt.data.entity.EntitySprzet;
+import wsg.projekt.data.entity.EntityWykladowca;
+import wsg.projekt.data.entity.EntityZamowienie;
+import wsg.projekt.data.entity.EntityZamowienieSprzetAlloc;
 import wsg.projekt.data.repository.RepositorySala;
 import wsg.projekt.data.repository.RepositorySprzet;
 import wsg.projekt.data.repository.RepositoryWykladowca;
@@ -63,7 +72,7 @@ public class MainJFrame extends JFrame {
 	public static void main(String[] args) {
 		preloader = new FrameAppPreloader();
 		preloader.setVisible(true);
-		((FrameAppPreloader) preloader).appendMessage("Ładowanie Hibernate...");
+		((FrameAppPreloader) preloader).appendMessage("Ładowanie Hibernate i łączenie z bazą danych...");
 		try{
 			new HibernateInit();
 		}catch(Exception e){
@@ -84,9 +93,9 @@ public class MainJFrame extends JFrame {
 		});
 	}
 	/* wpisuje jakieś dane z palca, żeby sprawdzić, czy Hibernate w ogóle działa*/
-	/*private void HibernateTest(){
+	private void HibernateTest(){
 
-		EntityManagerFactory emf;
+		/*EntityManagerFactory emf;
 		EntityManager em;
 		emf = Persistence.createEntityManagerFactory("wyposazeniewsgDB");
 		em = emf.createEntityManager();
@@ -98,7 +107,7 @@ public class MainJFrame extends JFrame {
 		EntityWykladowca wykladowca = new EntityWykladowca("Hans","Kloss");
 		zamowienie.setWykladowca(wykladowca);
 		zamowienie.setSala(sala);
-		zamowienie.setRodzajZajec("Zajęcia");
+		zamowienie.setRodzajZajec("Zajęcia2");
 		zamowienie.setUwagi("uwagi");
 		zamowienie.setDataStart(new Date());
 		zamowienie.setDataKoniec(new Date());
@@ -126,14 +135,14 @@ public class MainJFrame extends JFrame {
 		
 		System.out.println(zamowienie.getZamowieniaSprzety().get(0).getZamowienie().getRodzajZajec());
 		
-		em.persist(sala);
-		em.persist(wykladowca);
+		//em.persist(sala);
+		//em.persist(wykladowca);
 		em.persist(zamowienie);
 		em.getTransaction().commit();
 	
 		em.close();
-		emf.close();
-	}*/
+		emf.close();*/
+	}
 	
 	public MainJFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -176,7 +185,6 @@ public class MainJFrame extends JFrame {
 		tableWykladowcyReload();
 		tableSaleReload();
 		tableWyposazeniaReload();
-		
 		/*Kalendarz... Ta...*/
 		JPanel paneKalendarz = new JPanel();
 		tabbedPane.addTab("Kalendarz obłożenia", null, paneKalendarz, null);

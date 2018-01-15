@@ -22,6 +22,12 @@ public class EntityZamowienieSprzetAlloc implements java.io.Serializable {
 	private ZamowienieSprzetID pk = new ZamowienieSprzetID();
 	private int iloscSprzetu;
 	
+	public EntityZamowienieSprzetAlloc(){}
+	public EntityZamowienieSprzetAlloc(EntitySprzet sprzet, int i) {
+		getPk().setSprzet(sprzet);
+		this.iloscSprzetu = i;
+	}
+
 	@EmbeddedId
 	public ZamowienieSprzetID getPk() {
 		return pk;

@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -43,6 +44,9 @@ public class EntityZamowienie implements java.io.Serializable {
 	private String RodzajZajec;
 	@Column(name = "Uwagi", columnDefinition="VARCHAR(255) NOT NULL")
 	private String Uwagi;
+	@OneToOne
+	@JoinColumn(name="ZamowienieStaleID")
+	private EntityZamowienieStale ZamowienieStale;
 	
 	public EntityZamowienie(){}
 	public EntityZamowienie(EntityWykladowca wykladowca, EntitySala sala, List<EntityZamowienieSprzetAlloc> sprzety, Date dataStart,
@@ -58,6 +62,9 @@ public class EntityZamowienie implements java.io.Serializable {
 	}
 
 
+	public void setZamowienieID(int zamowienieID) {
+		ZamowienieID = zamowienieID;
+	}
 	public int getZamowienieID() {
 		return ZamowienieID;
 	}
@@ -105,4 +112,11 @@ public class EntityZamowienie implements java.io.Serializable {
 	public void setZamowieniaSprzety(List<EntityZamowienieSprzetAlloc> ZamowieniaSprzety) {
 		this.ZamowieniaSprzety = ZamowieniaSprzety;
 	}
+	public EntityZamowienieStale getZamowienieStale() {
+		return ZamowienieStale;
+	}
+	public void setZamowienieStale(EntityZamowienieStale zamowienieStale) {
+		ZamowienieStale = zamowienieStale;
+	}
+	
 }

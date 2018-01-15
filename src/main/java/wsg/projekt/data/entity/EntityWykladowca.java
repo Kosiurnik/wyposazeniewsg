@@ -60,5 +60,9 @@ public class EntityWykladowca implements java.io.Serializable {
 		Nazwisko = nazwisko;
 	}
 
+	@Override
+	public String toString() {
+	    return Imie+" "+Nazwisko;
+	}
 	
 }

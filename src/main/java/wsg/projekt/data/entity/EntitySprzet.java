@@ -82,5 +82,9 @@ public class EntitySprzet implements java.io.Serializable {
 	public void setZamowieniaSprzety(List<EntityZamowienieSprzetAlloc> ZamowieniaSprzety) {
 		this.ZamowieniaSprzety = ZamowieniaSprzety;
 	}
-
+	
+	@Override
+	public String toString() {
+		return Nazwa+" ("+DostepnaIlosc+" sztuk)";
+	}
 }
