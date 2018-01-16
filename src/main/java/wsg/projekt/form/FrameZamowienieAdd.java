@@ -39,6 +39,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import wsg.projekt.MainJFrame;
 import wsg.projekt.data.controller.AppEntityManager;
 import wsg.projekt.data.entity.EntitySala;
 import wsg.projekt.data.entity.EntitySprzet;
@@ -66,10 +67,10 @@ public class FrameZamowienieAdd extends JDialog {
 
 	/*Spring - ładuję beany z repozytoriami danych do ładowania ich w listach do modelu wypełniającego tabelki*/
 	private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("wyposazeniewsg-context.xml");
-	private RepositoryZamowienie repositoryZamowienie = context.getBean("RepositoryZamowienie",RepositoryZamowienie.class);
-	private RepositoryWykladowca repositoryWykladowca = context.getBean("RepositoryWykladowca",RepositoryWykladowca.class);
-	private RepositorySala repositorySala = context.getBean("RepositorySala",RepositorySala.class);
-	private RepositorySprzet repositorySprzet = context.getBean("RepositorySprzet",RepositorySprzet.class);
+	private RepositoryZamowienie repositoryZamowienie = MainJFrame.repositoryZamowienie;
+	private RepositoryWykladowca repositoryWykladowca = MainJFrame.repositoryWykladowca;
+	private RepositorySala repositorySala = MainJFrame.repositorySala;
+	private RepositorySprzet repositorySprzet = MainJFrame.repositorySprzet;
 	private JTable table;
 	private JTextField tfRodzajZajec;
 	private JTextPane tpUwagi;
@@ -89,7 +90,6 @@ public class FrameZamowienieAdd extends JDialog {
 	private JCheckBox chckStaleSb;
 	private JCheckBox chckStaleNd;
 	
-	@SuppressWarnings("unchecked")
 	public FrameZamowienieAdd() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setModal(true);
@@ -184,17 +184,19 @@ public class FrameZamowienieAdd extends JDialog {
 		p.put("text.today", "Dziś");
 		p.put("text.month", "Miesiąc");
 		p.put("text.year", "Rok");
+		SimpleDateFormat ftdate = new SimpleDateFormat("dd-MM-yyyy");
 		UtilDateModel dateModel = new UtilDateModel();
 		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel, p);
 		dpStart = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		dpStart.getJFormattedTextField().setFont(new Font("Tahoma", Font.BOLD, 13));
 		dpStart.setBounds(345, 83, 187, 25);
 		contentPane.add(dpStart);
+		dpStart.getJFormattedTextField().setText(ftdate.format(new Date()));
 		dpStart.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Date data = new Date();
-				SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+				SimpleDateFormat ft = new SimpleDateFormat ("dd-MM-yyyy");
 				System.out.println("Kontrola daty: "+ft.format(data)+" >= "+dpStart.getJFormattedTextField().getText());
 				try {
 					Date data2 = ft.parse(dpStart.getJFormattedTextField().getText());
@@ -376,6 +378,8 @@ public class FrameZamowienieAdd extends JDialog {
 					chckStaleSb.setEnabled(false);
 					chckStaleNd.setEnabled(false);
 					dpStart.setVisible(true);
+					if(dpStart.getJFormattedTextField().getText().equals("01-01-1970"))
+						dpStart.getJFormattedTextField().setText(ftdate.format(new Date()));
 				}
 			}
 		});
@@ -390,6 +394,9 @@ public class FrameZamowienieAdd extends JDialog {
 						try(AppEntityManager em = new AppEntityManager()){
 							em.getEntityManager().getTransaction().begin();
 							em.getEntityManager().persist(zamowienie);
+							if(chckbxZamwienieStale.isSelected()){
+								em.getEntityManager().persist(zamowienie.getZamowienieStale());
+							}
 							em.getEntityManager().getTransaction().commit();
 							dispose();
 						}catch(Exception e){
@@ -459,7 +466,7 @@ public class FrameZamowienieAdd extends JDialog {
     		return null;}
     	
     	Date dataRozpoczecia = null, dataZakonczenia = null;
-		SimpleDateFormat ftdatetime = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
+		SimpleDateFormat ftdatetime = new SimpleDateFormat ("dd-MM-yyyy HH:mm");
 		SimpleDateFormat fttime = new SimpleDateFormat ("HH:mm");
 		if(cbRozpoczecie.getSelectedItem().equals(cbZakonczenie.getSelectedItem())){
     		JOptionPane.showMessageDialog(null, "Godziny rozpoczęcia i zakończenia nie mogą być takie same!", "Błąd wprowadzania danych", JOptionPane.ERROR_MESSAGE);
@@ -494,7 +501,7 @@ public class FrameZamowienieAdd extends JDialog {
 					dataRozpoczecia = ftdatetime.parse(dpStart.getJFormattedTextField().getText()+" "+cbRozpoczecie.getSelectedItem());
 					dataZakonczenia = ftdatetime.parse(dpStart.getJFormattedTextField().getText()+" "+cbZakonczenie.getSelectedItem());
 				
-					SimpleDateFormat ft2 = new SimpleDateFormat ("yyyy-MM-dd");
+					SimpleDateFormat ft2 = new SimpleDateFormat ("dd-MM-yyyy");
 					Date dzisiaj = new Date();
 					Date datazamowienia = ft2.parse(dpStart.getJFormattedTextField().getText());
 

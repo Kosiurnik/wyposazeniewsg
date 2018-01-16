@@ -8,6 +8,7 @@
       <properties>
          <!-- <property name="spring.jackson.serialization.fail-on-empty-beans" value="false" /> -->
 	     <!-- <property name="hibernate.archive.autodetection" value="class" />-->
+	     <property name="connection.pool_size" value="1"/>
 	     <property name="hibernate.connection.CharSet" value="utf8"/>
 	     <property name="hibernate.connection.characterEncoding" value="utf8"/>
          <property name="hibernate.connection.useUnicode" value="true"/>

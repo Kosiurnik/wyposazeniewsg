@@ -6,13 +6,9 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -26,11 +22,6 @@ import javax.swing.border.BevelBorder;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import wsg.projekt.data.HibernateInit;
-import wsg.projekt.data.entity.EntitySala;
-import wsg.projekt.data.entity.EntitySprzet;
-import wsg.projekt.data.entity.EntityWykladowca;
-import wsg.projekt.data.entity.EntityZamowienie;
-import wsg.projekt.data.entity.EntityZamowienieSprzetAlloc;
 import wsg.projekt.data.repository.RepositorySala;
 import wsg.projekt.data.repository.RepositorySprzet;
 import wsg.projekt.data.repository.RepositoryWykladowca;
@@ -52,6 +43,7 @@ import wsg.projekt.form.FrameWykladowcaAdd;
 import wsg.projekt.form.FrameWykladowcaDelete;
 import wsg.projekt.form.FrameWykladowcaEdit;
 import wsg.projekt.form.FrameZamowienieAdd;
+import wsg.projekt.form.FrameZamowienieEdit;
 
 /*klasa startowa apki, tworzy pierwsze okienko i ładuje potrzebne rzeczy*/
 public class MainJFrame extends JFrame {
@@ -63,11 +55,11 @@ public class MainJFrame extends JFrame {
 	static JFrame preloader;
 	
 	/*Spring - ładuję beany z repozytoriami danych do ładowania ich w listach do modelu wypełniającego tabelki*/
-	private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("wyposazeniewsg-context.xml");
-	private RepositoryZamowienie repositoryZamowienie = context.getBean("RepositoryZamowienie",RepositoryZamowienie.class);
-	private RepositoryWykladowca repositoryWykladowca = context.getBean("RepositoryWykladowca",RepositoryWykladowca.class);
-	private RepositorySala repositorySala = context.getBean("RepositorySala",RepositorySala.class);
-	private RepositorySprzet repositorySprzet = context.getBean("RepositorySprzet",RepositorySprzet.class);
+	private static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("wyposazeniewsg-context.xml");
+	public static RepositoryZamowienie repositoryZamowienie = context.getBean("RepositoryZamowienie",RepositoryZamowienie.class);
+	public static RepositoryWykladowca repositoryWykladowca = context.getBean("RepositoryWykladowca",RepositoryWykladowca.class);
+	public static RepositorySala repositorySala = context.getBean("RepositorySala",RepositorySala.class);
+	public static RepositorySprzet repositorySprzet = context.getBean("RepositorySprzet",RepositorySprzet.class);
 	
 	public static void main(String[] args) {
 		preloader = new FrameAppPreloader();
@@ -259,8 +251,8 @@ public class MainJFrame extends JFrame {
 			private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e)
 		    {
-				//new FrameZamowieniaEdit(repositoryZamowienie.getZamowienieByID((int)tableZamowienia.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
-				//tableZamowieniaReload();
+				new FrameZamowienieEdit(repositoryZamowienie.getZamowienieByID((int)tableZamowienia.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
+				tableZamowieniaReload();
 		    }
 		};
 		ButtonColumn btnDeleteZamowienie = new ButtonColumn(tableZamowienia, deleteZamowienie, 8);

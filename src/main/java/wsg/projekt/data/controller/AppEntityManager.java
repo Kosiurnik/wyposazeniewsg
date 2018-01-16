@@ -17,9 +17,10 @@ public class AppEntityManager implements AutoCloseable {
 	}
 
 	public void close() throws Exception {
-		if (!entityManager.isOpen())
+		/*if (!entityManager.isOpen())
 			entityManager.close();
 		if(!entityManager.equals(null))
-			entityManager.clear();
+			entityManager.clear();*/
+		entityManager.close();
 	}
 }
