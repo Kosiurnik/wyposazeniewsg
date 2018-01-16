@@ -43,6 +43,7 @@ import wsg.projekt.form.FrameWykladowcaAdd;
 import wsg.projekt.form.FrameWykladowcaDelete;
 import wsg.projekt.form.FrameWykladowcaEdit;
 import wsg.projekt.form.FrameZamowienieAdd;
+import wsg.projekt.form.FrameZamowienieDelete;
 import wsg.projekt.form.FrameZamowienieEdit;
 
 /*klasa startowa apki, tworzy pierwsze okienko i ładuje potrzebne rzeczy*/
@@ -241,8 +242,8 @@ public class MainJFrame extends JFrame {
 			private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e)
 		    {
-				//new FrameZamowieniaDelete(repositoryZamowienie.getZamowienieByID((int)tableZamowienia.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
-				//tableZamowieniaReload();
+				new FrameZamowienieDelete(repositoryZamowienie.getZamowienieByID((int)tableZamowienia.getValueAt(Integer.valueOf(e.getActionCommand()), 0))).setVisible(true);
+				tableZamowieniaReload();
 		    }
 		};
 		
