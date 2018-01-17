@@ -45,6 +45,7 @@ import wsg.projekt.form.FrameWykladowcaEdit;
 import wsg.projekt.form.FrameZamowienieAdd;
 import wsg.projekt.form.FrameZamowienieDelete;
 import wsg.projekt.form.FrameZamowienieEdit;
+import wsg.projekt.form.PanelCalendar;
 
 /*klasa startowa apki, tworzy pierwsze okienko i ładuje potrzebne rzeczy*/
 public class MainJFrame extends JFrame {
@@ -179,8 +180,9 @@ public class MainJFrame extends JFrame {
 		tableSaleReload();
 		tableWyposazeniaReload();
 		/*Kalendarz... Ta...*/
-		JPanel paneKalendarz = new JPanel();
+		PanelCalendar paneKalendarz = new PanelCalendar();
 		tabbedPane.addTab("Kalendarz obłożenia", null, paneKalendarz, null);
+		
 		
 		
 		/*Menu prawe z przyciskami*/
