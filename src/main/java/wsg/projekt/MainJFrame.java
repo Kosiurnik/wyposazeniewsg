@@ -180,7 +180,7 @@ public class MainJFrame extends JFrame {
 		tableSaleReload();
 		tableWyposazeniaReload();
 		/*Kalendarz... Ta...*/
-		PanelCalendar paneKalendarz = new PanelCalendar();
+		PanelCalendar paneKalendarz = new PanelCalendar(repositoryZamowienie);
 		tabbedPane.addTab("Kalendarz obłożenia", null, paneKalendarz, null);
 		
 		
