@@ -34,11 +34,11 @@ import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
 import wsg.projekt.data.controller.AppEntityManager;
 import wsg.projekt.data.entity.EntitySala;
 import wsg.projekt.data.entity.EntitySprzet;
@@ -191,7 +191,7 @@ public class FrameZamowienieEdit extends JDialog {
 		p.put("text.month", "Miesiąc");
 		p.put("text.year", "Rok");
 		UtilDateModel dateModel = new UtilDateModel();
-		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel, p);
+		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel);
 		dpStart = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		dpStart.getJFormattedTextField().setFont(new Font("Tahoma", Font.BOLD, 13));
 		dpStart.setBounds(345, 83, 187, 25);

@@ -5,10 +5,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
-
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
 import wsg.projekt.data.component.SpanTable;
 import wsg.projekt.data.entity.EntityZamowienie;
 import wsg.projekt.data.entity.EntityZamowienieSprzetAlloc;
@@ -74,7 +73,7 @@ public class PanelCalendar extends JPanel {
 
 		SimpleDateFormat ftdate = new SimpleDateFormat("dd-MM-yyyy");
 		UtilDateModel dateModel = new UtilDateModel();
-		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel, p);
+		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel);
 		upperPanel.setLayout(new GridLayout(3, 2, 15, 0));
 
 		JLabel lbDataStart = new JLabel("Data od:");
@@ -90,7 +89,7 @@ public class PanelCalendar extends JPanel {
 		dpStart.getJFormattedTextField().setText(ftdate.format(new Date()));
 
 		UtilDateModel dateModel2 = new UtilDateModel();
-		JDatePanelImpl datePanel2 = new JDatePanelImpl(dateModel2, p);
+		JDatePanelImpl datePanel2 = new JDatePanelImpl(dateModel2);
 		dpEnd = new JDatePickerImpl(datePanel2, new DateLabelFormatter());
 		dpEnd.getJFormattedTextField().setFont(new Font("Tahoma", Font.BOLD, 13));
 		upperPanel.add(dpEnd);
