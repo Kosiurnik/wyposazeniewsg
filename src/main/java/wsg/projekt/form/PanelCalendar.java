@@ -9,6 +9,11 @@ import wsg.projekt.data.tablemodel.DefaultSpanModel;
 import wsg.projekt.data.tablerenderer.HtmlTableCell;
 
 import java.awt.BorderLayout;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 
 //tu ma być ten cały kalendarz...
@@ -40,5 +45,26 @@ public class PanelCalendar extends JPanel {
         
         add(new JScrollPane(spanTable));
 	}
+	
+	private String[][] generateModel(){
+		
+		return null;
+	}
+	
+	private List<String> getTimeList(int start, int end, int offset){
+    	List<String> czas = new ArrayList<String>();
+    	
+    	SimpleDateFormat ft = new SimpleDateFormat ("HH:mm");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date(0));
+        calendar.add(Calendar.HOUR, +start);
+        czas.add(ft.format(calendar.getTime()));
+        while((calendar.getTime().getHours()+1)<=end){
+            calendar.add(Calendar.MINUTE, +offset);
+            czas.add(ft.format(calendar.getTime()));
+        }
+    	
+    	return czas;
+    }
 
 }
